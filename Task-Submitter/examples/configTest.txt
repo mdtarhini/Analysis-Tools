@@ -1,0 +1,37 @@
+#Config file template. Lines that begin with # will be ignored
+
+#Absolute path to the main directroy where the "RunMyTask.C" macro can be accessed. This argument is mandatory.
+RunDir /Users/tarhini/work/alice-analysis/Task-Submitter
+
+#Optional name for the generate run macro
+MacroName TestMacro
+
+#List of different tasks to be added to the analysis train. For each task, specify the source path, the task name, the addTask path and name and #argument. In case the task the task is in ALICE_PHYSICS, you don't need to specify the whole path ($ALICE_PHYSICS is enough). At least one task #should be provided
+TaskPath /Users/tarhini/work/alice-analysis/Task-Submitter/examples/SimpleDimuonTask
+TaskName TaskDimuonPP
+AddTaskName AddTaskSimpleDimuon
+TaskArgument ()
+AddTaskPath /Users/tarhini/work/alice-analysis/Task-Submitter/examples/SimpleDimuonTask
+
+AddTaskPath $ALICE_PHYSICS/OADB/macros
+AddTaskName AddTaskPhysicsSelection
+TaskPath $ALICE_PHYSICS
+TaskName AliPhysicsSelectionTask
+TaskArgument (0,0)
+
+#Run mode. It can be "local" for local analysis, or "test", "full", "terminate", "merge" for grid analysis
+RunMode local
+
+#input file location. In case of local run mode, the file should be an AOD root file. For grid modes, run list are supported. This paramater is #mandatory
+Input /Users/tarhini/AODLOCAL/2017/LHC17o/AliAOD.Muons.root
+
+#/Users/tarhini/work/alice-analysis/Task-Submitter/test/runList.txt
+#/Users/tarhini/AODLOCAL/2017/LHC17o/AliAOD.Muons.root
+
+#Directory and pattern of the data on the grid (not needed in case of local analysis)
+GRidDataDir /alice/data/2017/LHC17o
+GRidDataPattern /muon_calo_pass1/AOD203/*/AliAOD.Muons.root
+
+#working and output directroy for grid analysis
+GridWorkingDir DeleteThis
+GridOutputDir output2017
