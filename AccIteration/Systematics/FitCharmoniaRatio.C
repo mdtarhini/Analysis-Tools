@@ -1,6 +1,5 @@
 /*
 A tentative to estimate the systematic due to the pt-y correlation on the psi(2s) MC input using the Jpsi ones. This macro fits the cross section ratios vs pt and y with a pol1 function and generate other functions by varying the fits parameters within their uncertainties.
-root -l FitCharmoniaRatio.C
 */
 
 #ifndef __CINT__
@@ -64,6 +63,7 @@ void FitRatioVsRap()
   SetCanvasStyle(canRatioVsRap);
 
   TH1F *histoRatioVsRap = new TH1F("histoRatioVsRap", "", numberOfRapBins, &arrayRapBins[0]);
+  SetHistoStyle(histoRatioVsRap, kBlack, kFullCircle, 0.8, "y", "Ratio", 1,0);
   histoRatioVsRap->Sumw2();
   for (int iRap = 0; iRap < numberOfRapBins; iRap++)
   {
@@ -92,7 +92,7 @@ void FitRatioVsRap()
     fitSmeared->FixParameter(0, a);
     fitSmeared->FixParameter(1, b);
     // fitSmeared->SetLineColor(iPoint);
-    fitSmeared->SetLineColorAlpha(iPoint, 0.25);
+    fitSmeared->SetLineColorAlpha(iPoint+1, 0.25);
     fitSmeared->DrawCopy("same");
     fitSmeared->Write();
   }
@@ -111,6 +111,7 @@ void FitRatioVsPt()
   SetCanvasStyle(canRatioVsPt);
 
   TH1F *histoRatioVsPt = new TH1F("histoRatioVsPt", "", numberOfPtBins, &arrayPtBins[0]);
+  SetHistoStyle(histoRatioVsPt, kBlack, kFullCircle, 0.8, "y", "Ratio", 1,0);
   histoRatioVsPt->Sumw2();
   for (int iPt = 0; iPt < numberOfPtBins; iPt++)
   {
@@ -121,7 +122,7 @@ void FitRatioVsPt()
     histoRatioVsPt->SetBinError(iPt + 1, error);
   }
   histoRatioVsPt->SetMinimum(0);
-  histoRatioVsPt->SetMaximum(0.8);
+  histoRatioVsPt->SetMaximum(0.7);
 
   TF1 *fitRatioVsPt = new TF1("fitRatioVsPt", "[0]*x+[1]", 0, 12);
   histoRatioVsPt->Fit(fitRatioVsPt, "S");
@@ -139,7 +140,7 @@ void FitRatioVsPt()
     fitSmeared->FixParameter(0, a);
     fitSmeared->FixParameter(1, b);
     // fitSmeared->SetLineColor(iPoint);
-    fitSmeared->SetLineColorAlpha(iPoint, 0.25);
+    fitSmeared->SetLineColorAlpha(iPoint+1, 0.25);
     fitSmeared->DrawCopy("same");
     fitSmeared->Write();
   }

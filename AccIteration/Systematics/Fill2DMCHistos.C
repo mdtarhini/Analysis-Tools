@@ -1,6 +1,5 @@
 /*
 This macro takes as inputs a tree that contains dimuon information (generated and reconstructed) and fill them in histograms. 
-root -l Fill2DHistos.C
 */
 #include <vector>
 #include "Riostream.h"
@@ -34,7 +33,7 @@ enum enumDimuon
 };
 
 //-------------------------------------------------------------------------------------------------------------------------------------//
-void Fill2DHistos()
+void Fill2DMCHistos()
 {
 
   //-------------------------------------------------------------------------------------------------------------------------------------//
@@ -42,7 +41,7 @@ void Fill2DHistos()
   Double_t arrayRapidityBins[] = {-4, -3.875, -3.75, -3.625, -3.5, -3.375, -3.25, -3.125, -3, -2.875, -2.75, -2.625, -2.5};
   int numberOfRapidityBins = sizeof(arrayRapidityBins) / sizeof(arrayRapidityBins[0]) - 1;
 
-  Double_t arrayPtBins[] = {0, 0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,9,10,11,12};
+  Double_t arrayPtBins[] = {0, 0.5, 1,1.25, 1.5, 1.75, 2,2.25, 2.5,2.75, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 9, 10, 11, 12};
   int numberOfPtBins = sizeof(arrayPtBins) / sizeof(arrayPtBins[0]) - 1;
   //-------------------------------------------------------------------------------------------------------------------------------------//
   //Input file

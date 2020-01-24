@@ -1,7 +1,3 @@
-/*
-root -l GetSystematics.C
-*/
-
 #include "../Common.C"
 //-------------------------------------------------------------------------------------------------------------------------------------//
 //Input files
@@ -10,7 +6,7 @@ TH2F *histoGenRapPt = ((TH2F *)fileMC->Get("histoGenRapPt"));
 TH2F *histoRecRapPt = ((TH2F *)fileMC->Get("histoRecRapPt"));
 
 TFile *fileWeight = new TFile("Weight2D.root");
-int numberOfTrials = 25;
+int numberOfTrials = 50;
 //-------------------------------------------------------------------------------------------------------------------------------------//
 
 //-------------------------------------------------------------------------------------------------------------------------------------//
@@ -53,6 +49,7 @@ void GetSystematics()
   TCanvas *canRMSIntegrated = new TCanvas("canRMSIntegrated", "", 1020, 800);
   SetCanvasStyle(canRMSIntegrated);
   TH1F *histoRMSIntegrated = new TH1F("histoRMSIntegrated", "", 10000, 0, 1);
+  SetHistoStyle(histoRMSIntegrated, kBlack, kFullCircle, 0.8, "Acc*Effi", "Trials", 1,0);
   for (int iTrialRap = 0; iTrialRap < numberOfTrials; iTrialRap++)
   {
     for (int iTrialPt = 0; iTrialPt < numberOfTrials; iTrialPt++)
@@ -62,6 +59,14 @@ void GetSystematics()
   }
   histoRMSIntegrated->Draw();
   cout << "integrated systematic = " << 100 * histoRMSIntegrated->GetRMS() / histoRMSIntegrated->GetMean() << endl;
+  TLegend *legMain = new TLegend(0.235, 0.3, 0.455, 0.5);
+  legMain->SetMargin(0.1);
+  legMain->SetFillStyle(0);
+  legMain->SetLineColorAlpha(0, 0);
+  legMain->SetTextColor(kBlack);
+  legMain->AddEntry("NULL", Form("RMS = %2.2f %%", 100 * histoRMSIntegrated->GetRMS() / histoRMSIntegrated->GetMean()), "");
+  legMain->Draw();
+  canRMSIntegrated->SaveAs("RMSIntegrated.pdf");
   //-------------------------------------------------------------------------------------------------------------------------------------//
 
   //-------------------------------------------------------------------------------------------------------------------------------------//
@@ -71,6 +76,9 @@ void GetSystematics()
   canRMSVsPt->cd();
 
   TH1F *histoAccRMSVsPt = new TH1F("histoAccRMSVsPt", "", numberOfPtBins, &arrayPtBins[0]);
+  // SetHistoStyle(histoAccRMSVsPt, kBlack, kFullCircle, 0.8, "Pt", "RMS", 1,0);
+  histoAccRMSVsPt->GetYaxis()->SetTitle("RMS");
+  histoAccRMSVsPt->GetXaxis()->SetTitle("pt");
   histoAccRMSVsPt->Sumw2();
 
   for (int iPtBin = 0; iPtBin < numberOfPtBins; iPtBin++)
@@ -86,6 +94,7 @@ void GetSystematics()
     histoAccRMSVsPt->SetBinContent(iPtBin + 1, 100 * histoRMS->GetRMS() / histoRMS->GetMean());
   }
   histoAccRMSVsPt->Draw();
+  canRMSVsPt->SaveAs("RMSVsPT.pdf");
   //-------------------------------------------------------------------------------------------------------------------------------------//
 
   //-------------------------------------------------------------------------------------------------------------------------------------//
@@ -96,6 +105,8 @@ void GetSystematics()
 
   TH1F *histoAccRMSVsRap = new TH1F("histoAccRMSVsRap", "", numberOfRapBins, &arrayRapBins[0]);
   histoAccRMSVsRap->Sumw2();
+  histoAccRMSVsRap->GetYaxis()->SetTitle("RMS");
+  histoAccRMSVsRap->GetXaxis()->SetTitle("y");
 
   for (int iRapBin = 0; iRapBin < numberOfRapBins; iRapBin++)
   {
@@ -110,5 +121,6 @@ void GetSystematics()
     histoAccRMSVsRap->SetBinContent(iRapBin + 1, 100 * histoRMS->GetRMS() / histoRMS->GetMean());
   }
   histoAccRMSVsRap->Draw();
+  canRMSVsRap->SaveAs("RMSVsRap.pdf");
   //-------------------------------------------------------------------------------------------------------------------------------------//
 }

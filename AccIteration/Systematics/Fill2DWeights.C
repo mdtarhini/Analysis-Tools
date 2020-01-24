@@ -1,6 +1,5 @@
 /*
 Produce a 2D histogram containing the product of pt and rapidity shaoe varations (results of FitCharmoniaRatio.C).
-root -l Fill2DWeights.C
 */
 int numberOfTrials = 50;
 //-------------------------------------------------------------------------------------------------------------------------------------//
@@ -11,7 +10,7 @@ void Fill2DWeights()
   Double_t arrayRapidityBins[] = {-4, -3.875, -3.75, -3.625, -3.5, -3.375, -3.25, -3.125, -3, -2.875, -2.75, -2.625, -2.5};
   int numberOfRapidityBins = sizeof(arrayRapidityBins) / sizeof(arrayRapidityBins[0]) - 1;
 
-  Double_t arrayPtBins[] = {0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 9, 10, 11, 12};
+  Double_t arrayPtBins[] = {0, 0.5, 1,1.25, 1.5, 1.75, 2,2.25, 2.5,2.75, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 9, 10, 11, 12};
   int numberOfPtBins = sizeof(arrayPtBins) / sizeof(arrayPtBins[0]) - 1;
 
   //-------------------------------------------------------------------------------------------------------------------------------------//
