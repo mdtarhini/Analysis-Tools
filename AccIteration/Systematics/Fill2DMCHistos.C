@@ -1,5 +1,6 @@
 /*
 This macro takes as inputs a tree that contains dimuon information (generated and reconstructed) and fill them in histograms. 
+root -l Fill2DHistos.C
 */
 #include <vector>
 #include "Riostream.h"

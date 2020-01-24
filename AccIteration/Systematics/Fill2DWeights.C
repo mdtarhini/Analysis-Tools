@@ -1,5 +1,6 @@
 /*
 Produce a 2D histogram containing the product of pt and rapidity shaoe varations (results of FitCharmoniaRatio.C).
+root -l Fill2DWeights.C
 */
 int numberOfTrials = 50;
 //-------------------------------------------------------------------------------------------------------------------------------------//

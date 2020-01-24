@@ -1,5 +1,6 @@
 /*
 A tentative to estimate the systematic due to the pt-y correlation on the psi(2s) MC input using the Jpsi ones. This macro fits the cross section ratios vs pt and y with a pol1 function and generate other functions by varying the fits parameters within their uncertainties.
+root -l FitCharmoniaRatio.C
 */
 
 #ifndef __CINT__
