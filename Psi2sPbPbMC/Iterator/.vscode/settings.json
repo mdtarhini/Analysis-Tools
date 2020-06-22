@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "FillHistoAndGetAccEffi.C": "cpp",
+        "AccEffiIterator.C": "cpp",
+        "CompareEffi.C": "cpp",
+        "FillNPsi2s.C": "cpp",
+        "FitGeneratedPt.C": "cpp",
+        "FitYields.C": "cpp",
+        "GetWeights.C": "cpp",
+        "Common.C": "cpp"
+    }
+}

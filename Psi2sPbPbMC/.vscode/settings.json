@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "FillHistoAndGetAccEffi.C": "cpp",
+        "GetAccEffi.C": "cpp",
+        "CompareEffi.C": "cpp",
+        "GetWeights.C": "cpp",
+        "FitYields.C": "cpp",
+        "Common.C": "cpp"
+    }
+}
