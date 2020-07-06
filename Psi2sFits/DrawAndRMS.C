@@ -11,7 +11,7 @@ void GetFitResults(TH3F *histoFitResults, TString rangeName, TString testName, s
 Double_t rapRanges[][2] = {{-4, -2.5}};
 int numberOfRapRanges = sizeof(rapRanges) / sizeof(rapRanges[0]);
 
-Double_t centRanges[][2] = {{60, 90}};
+Double_t centRanges[][2] = {{0, 90},{0, 10},{10, 20},{20, 40},{40, 60},{60, 90}};
 int numberOfCentRanges = sizeof(centRanges) / sizeof(centRanges[0]);
 
 Double_t ptRanges[][2] = {{0, 12}};
@@ -19,21 +19,22 @@ int numberOfPtRanges = sizeof(ptRanges) / sizeof(ptRanges[0]);
 //---------------------------------------------------------//
 
 //------------------Fit configurations---------------------//
-Int_t arrayOfBkgdFunctions[] = {kVWG2};
+Int_t arrayOfBkgdFunctions[] = {kVWG2, kPol2OverPol3};
 int numberOfBkgdFunctions = sizeof(arrayOfBkgdFunctions) / sizeof(arrayOfBkgdFunctions[0]);
 
 Int_t arrayOfSigFunctions[] = {kCB21S, kNA601S};
 int numberOfSigFunctions = sizeof(arrayOfSigFunctions) / sizeof(arrayOfSigFunctions[0]);
 
-Double_t arrayOfPsi2sWidth[] = {1.01, 1.05};
-int numberOfPsi2sWidth = sizeof(arrayOfPsi2sWidth) / sizeof(arrayOfPsi2sWidth[0]);
-
 Int_t arrayOfTailsSets[] = {kMCGeant3, kData13TeV};
 int numberOfTailsSets = sizeof(arrayOfTailsSets) / sizeof(arrayOfTailsSets[0]);
 
-Double_t arrayOfFitRanges[][2] = {{2.2, 4.5}};
+Double_t arrayOfPsi2sWidth[] = {1.01,1.05};
+int numberOfPsi2sWidth = sizeof(arrayOfPsi2sWidth) / sizeof(arrayOfPsi2sWidth[0]);
+
+Double_t arrayOfFitRanges[][2] = {{2.2, 4.5},{2.4, 4.7} };
 int numberOfFitRanges = sizeof(arrayOfFitRanges) / sizeof(arrayOfFitRanges[0]);
 //---------------------------------------------------------//
+
 
 //-----------------------------------------------------------------------------------------------------//
 void DrawAndRMS()
@@ -184,6 +185,8 @@ void DrawAndRMSForRange(TH3F *histoFitResultsAll, TString rangeName, TString ran
 
     for (int iTest = 1; iTest <= numberOfTests; iTest++)
     {
+      if((histoFitResults[kChi2PerTest]->GetBinContent(iTest) > 3) || (histoFitResults[kCovQuality]->GetBinContent(iTest) != 3) || (histoFitResults[kFitStatus]->GetBinContent(iTest) != 0) ) continue;
+
       Double_t testWeight = 1;
       TString strTestLabel = histoFitResults[iVariable]->GetXaxis()->GetBinLabel(iTest);
       if (strTestLabel.Contains("Data"))
@@ -198,6 +201,9 @@ void DrawAndRMSForRange(TH3F *histoFitResultsAll, TString rangeName, TString ran
 
     for (int iTest = 1; iTest <= numberOfTests; iTest++)
     {
+
+      if((histoFitResults[kChi2PerTest]->GetBinContent(iTest) > 3) || (histoFitResults[kCovQuality]->GetBinContent(iTest) != 3) || (histoFitResults[kFitStatus]->GetBinContent(iTest) != 0) ) continue;
+
       Double_t testWeight = 1;
       TString strTestLabel = histoFitResults[iVariable]->GetXaxis()->GetBinLabel(iTest);
       if (strTestLabel.Contains("Data"))
